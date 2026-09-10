@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07060a" />
+    <title>Sunrise Alarm</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="yt-wrap" aria-hidden="true">
+      <div id="yt-player"></div>
+    </div>
+    <div id="alarm-wrap" aria-hidden="true">
+      <div id="alarm-player"></div>
+    </div>
+    <canvas id="fallback-sky" hidden></canvas>
+    <div id="dim-overlay" aria-hidden="true"></div>
+    <div id="dawn-overlay" aria-hidden="true"></div>
+    <div id="vignette" aria-hidden="true"></div>
+
+    <main id="setup" class="panel">
+      <p class="eyebrow">TV night light</p>
+      <h1>Sunrise Alarm</h1>
+      <p class="lede">
+        Plays that looping nature video overnight, silent and as dim as you want.
+        When the light starts, your message appears over the video and quiet
+        sound fades in. At alarm time, the clock brightens and the alarm track plays.
+      </p>
+
+      <form id="setup-form">
+        <label class="field">
+          <span>Alarm time</span>
+          <input id="alarm-time" type="time" required />
+        </label>
+
+        <label class="field">
+          <span>Light and sound start</span>
+          <select id="fade-minutes">
+            <option value="15">15 minutes before</option>
+            <option value="30" selected>30 minutes before</option>
+            <option value="45">45 minutes before</option>
+            <option value="60">60 minutes before</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Overnight brightness</span>
+          <input id="brightness" type="range" min="0" max="100" value="35" />
+          <span id="brightness-label" class="hint">35% — dim</span>
+        </label>
+
+        <label class="field">
+          <span>Morning message</span>
+          <textarea id="morning-note" rows="3" maxlength="280" placeholder="This appears over the video as soon as the light starts"></textarea>
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="start-btn">Start overnight</button>
+          <button type="button" class="btn ghost" id="preview-btn">Preview sunrise</button>
+        </div>
+      </form>
+    </main>
+
+    <section id="night" class="hud hidden" aria-live="polite">
+      <div class="clock-block">
+        <p id="status-label">Until dawn</p>
+        <p id="clock">00:00</p>
+        <p id="live-message" class="live-message hidden"></p>
+        <p id="alarm-caption"></p>
+      </div>
+      <div class="hud-bottom">
+        <label class="brightness-live">
+          <span>Brightness</span>
+          <input id="night-brightness" type="range" min="0" max="100" value="35" />
+        </label>
+        <div class="hud-actions">
+          <button type="button" class="btn primary hidden" id="dismiss-btn">Turn off alarm</button>
+          <button type="button" class="btn secondary" id="fullscreen-btn">Full screen</button>
+          <button type="button" class="btn ghost" id="stop-btn">Stop</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
